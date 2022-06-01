@@ -1,6 +1,11 @@
 class Order < ApplicationRecord
   before_create -> { generate_number(hash_size) }
+  
+  #Relationships
   belongs_to :user
+  has_many :order_items
+  has_many :products, through: :order_items
+
 
   #Validations
   validates :number, uniqueness: true
